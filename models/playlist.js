@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
 
   class Playlist extends Model { }
   Playlist.init({
-    name:{
-      type : DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull : {msg : "Playlist Name cannot be empty"},
-        notEmpty: {msg : "Playlist Name cannot be empty"}
+        notNull: { msg: "Playlist Name cannot be empty" },
+        notEmpty: { msg: "Playlist Name cannot be empty" }
       }
     },
     UserId: DataTypes.INTEGER
