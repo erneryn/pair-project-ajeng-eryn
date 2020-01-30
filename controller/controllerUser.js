@@ -1,6 +1,8 @@
 'use strict'
 
 const User = require('../models').User
+const nodemailer = require('nodemailer')
+
 
 class ControllerUser {
   static home(req, res) {
@@ -57,10 +59,43 @@ class ControllerUser {
       age: req.body.age,
       email: req.body.email
     }
+
+    const output = `<h1>Hello ${dataUser.name}!</h1>
+    <h3> Welcome to Hits Music! </h3>
+    <p>To login, use this information:</p>
+    <p>username: ${dataUser.username}</p>
+    <p>password: ${dataUser.password}</p>`
+
     User
       .create(dataUser)
       .then(result => {
-        res.redirect('/home')
+
+        let transporter = nodemailer.createTransport({
+          service: 'gmail',
+          logger: true,
+          debug: true,
+          auth: {
+            user: 'hitsmusickfc@gmail.com', // generated ethereal user
+            pass: 'Hacktiv8'  // generated ethereal password
+          }
+        });
+
+        let mailOptions = {
+          from: '"Nodemailer Contact" <hitsmusickfc@gmail.com>', // sender address
+          to: dataUser.email, // list of receivers
+          subject: 'Welcome to HitsMusic!', // Subject line
+          text: 'Welcome to HitsMusic!', // plain text body
+          html: output // html body
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return console.log(error);
+          }
+
+          res.redirect('/login')
+        });
+
       })
       .catch(err => {
         let errors = err.errors
