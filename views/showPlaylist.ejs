@@ -20,34 +20,41 @@
 </head>
 
 <body>
+    <%-include("./partialNav")%>
+    <div class="container my-5">
 
-  <table class="table" style="text-align: center;">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Playlist Name</th>
-        <th scope="col">Song List</th>
-        <th scope="col">Owner</th>
-        <th scope="col">Star</th>
-        <th scope="col">Up Vote</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <% lists.forEach(list => { %>
-        <td> <%= list.name %> </td>
-        <td><% list.Songs.forEach(song => { %>
-          <li> <%= song.title %> </li>
-          <% }) %> </td>
-        <td> <%= list.User.name %> </td>
-        <td> 99 </td>
-        <td>
-          <a class="btn btn-dark" href="#" role="button">Thumbs Up</a>
-        </td>
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
-
+   <div class="row">
+     <div class="col">
+        <table class="table" style="text-align: center;">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Playlist Name</th>
+                <th scope="col">Song List</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Star</th>
+                <th scope="col">Up Vote</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <% lists.forEach(list => { %>
+                <td> <%= list.name %> </td>
+                <td><% list.Songs.forEach(song => { %>
+                  <li> <%= song.title %> </li>
+                  <% }) %> </td>
+                <td> <%= list.User.name %> </td>
+                <td> 99 </td>
+                <td>
+                  <a class="btn btn-dark" href="#" role="button">Thumbs Up</a>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+     </div>
+   </div>
+ 
+</div>
 </body>
 
 </html>

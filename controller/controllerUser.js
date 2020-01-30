@@ -4,8 +4,12 @@ const User = require('../models/').User
 
 class ControllerUser {
 
+  static loginform(req,res){
+
+    res.render('loginpage',{errors: []})
+  }
+
   static formadduser(req,res){
-    
     res.render('addUser' ,{ data:{}, errors: []})
   }
 
