@@ -3,6 +3,8 @@ module.exports = (sequelize, DataTypes) => {
 
   const Sequelize = sequelize.Sequelize
   const Model = Sequelize.Model
+  const bcrypt = require('bcryptjs');
+  const salt = bcrypt.genSaltSync(10);
 
   class User extends Model { }
 
@@ -26,9 +28,23 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     age: DataTypes.INTEGER,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING
-  }, { sequelize })
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    sequelize,
+    hooks: {
+      beforeCreate: (instance, options) => {
+        const hash = bcrypt.hashSync(instance.password, salt);
+        instance.password = hash
+      }
+    }
+  })
 
   User.associate = function (models) {
     // associations can be defined here
