@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   UserPlaylist.init({
     PlaylistId: DataTypes.INTEGER,
     SongId: DataTypes.INTEGER
-  }, { sequelize })
+  },{sequelize})
 
   UserPlaylist.associate = function (models) {
     // associations can be defined here
