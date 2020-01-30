@@ -15,6 +15,10 @@ app.use(session({
 
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
+app.get('/',function(req,res) {
+  res.redirect('/home')
+})
+
 
 app.use('/', homeRouter)
 
