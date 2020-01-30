@@ -2,6 +2,7 @@
 
 const User = require('../models').User
 const nodemailer = require('nodemailer')
+const bcrypt = require('bcryptjs');
 
 
 class ControllerUser {
@@ -13,7 +14,7 @@ class ControllerUser {
 
   static loginform(req, res) {
     let logIn = req.session.user
-    res.render('loginpage' ,{ logIn })
+    res.render('loginpage', { logIn })
   }
 
   static login(req, res) {
@@ -24,31 +25,36 @@ class ControllerUser {
 
     User
       .findOne({
-        where: {
-          username: data.username
-        }
+        where:
+          { username: data.username }
       })
       .then(result => {
         let success = `Hi ${result.username}!`
-
-        if (result.password == data.password) {
-          req.session.user = {
-            username: result.username,
-            id: result.id
+        if (result) {
+          if (bcrypt.compareSync(data.password, result.dataValues.password)) {
+            req.session.user = {
+              username: result.username,
+              id: result.id
+            }
+            req.app.locals.welcome = success
+            res.redirect(`/home?success=${success}`)
+          } else {
+            throw err
           }
-          req.app.locals.welcome = success
-          res.redirect(`/home?success=${success}`)
+        } else {
+          throw err
         }
       })
       .catch(err => {
-        let error = 'e-mail or password is invalid!'
-        res.render('loginpage', { error })
+        // res.send('err')
+        let errors = 'e-mail or password is invalid!'
+        res.render('loginpage', { errors, logIn: '' })
       })
   }
 
   static formadduser(req, res) {
     let logIn = req.session.user
-    res.render('addUser', { data: {}, errors: [] ,logIn})
+    res.render('addUser', { data: {}, errors: [], logIn })
   }
 
   static adduser(req, res) {
