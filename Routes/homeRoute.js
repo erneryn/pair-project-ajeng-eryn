@@ -11,6 +11,7 @@ router.post('/login', ControllerUser.login)
 router.get('/adduser', ControllerUser.formadduser)
 router.post('/adduser', ControllerUser.adduser)
 
+router.get('/logout', ControllerUser.logout)
 
 
 module.exports = router
