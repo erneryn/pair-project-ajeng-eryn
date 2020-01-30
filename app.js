@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const router = require('./Routes/router')
+const homeRouter = require('./Routes/homeRoute')
+const userRouter = require('./Routes/userRoute')
+const playlistRouter = require('./Routes/playlistRoute')
 const session = require('express-session')
 
 app.use(session({
@@ -13,15 +15,18 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 
-// app.use(function (req, res, next) {
-//   if (req.session.user) {
-//     next()
-//   } else {
-//     res.redirect('/login')
-//   }
-// })
+app.use('/', homeRouter)
+
+app.use(function (req, res, next) {
+  if (req.session.user) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+})
 
 
-app.use('/', router)
+app.use('/user', userRouter)
+app.use('/playlist', playlistRouter)
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`))
