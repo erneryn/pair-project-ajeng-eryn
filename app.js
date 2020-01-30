@@ -17,13 +17,13 @@ app.set('view engine', 'ejs')
 
 app.use('/', homeRouter)
 
-app.use(function (req, res, next) {
-  if (req.session.user) {
-    next()
-  } else {
-    res.redirect('/login')
-  }
-})
+// app.use(function (req, res, next) {
+//   if (req.session.user) {
+//     next()
+//   } else {
+//     res.redirect('/login')
+//   }
+// })
 
 
 app.use('/user', userRouter)

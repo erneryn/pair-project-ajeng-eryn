@@ -118,37 +118,37 @@ class ControllerPlaylist {
       })
   }
 
-  static formNewPlaylist(req,res){
-    res.render('addnewplaylist', {errors: [] })
+  static formNewPlaylist(req, res) {
+    res.render('addnewplaylist', { errors: [] })
   }
 
-  static addNewPlaylist(req,res){
+  static addNewPlaylist(req, res) {
     let data = {
-      name : req.body.name,
+      name: req.body.name,
       UserId: req.params.id
     }
 
     Playlist
-    .create(data)
-    .then((result)=>{
-      res.redirect('/4/addSongToPlaylist')
-    })
-    .catch(err=>{
-      res.render('addnewplaylist', { errors : err.errors})
-    })
-    
+      .create(data)
+      .then((result) => {
+        res.redirect('/4/addSongToPlaylist')
+      })
+      .catch(err => {
+        res.render('addnewplaylist', { errors: err.errors })
+      })
+
   }
-  
-  static addSongForm(req,res){
+
+  static addSongForm(req, res) {
     Song
-    .findAll()
-    .then(result=>{
-      res.render('addsongplaylist',{result})
-    })
+      .findAll()
+      .then(result => {
+        res.render('addsongplaylist', { result })
+      })
   }
-  
-  static addSongPlaylist(req,res){
-    
+
+  static addSongPlaylist(req, res) {
+
   }
 }
 
