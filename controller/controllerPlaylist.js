@@ -4,7 +4,8 @@ class ControllerPlaylist {
   static showPlaylist(req, res) {
     Playlist
       .findAll({
-        include: [Song, User]
+        include: [Song, User],
+        order: [['stars', 'DESC']]
       })
       .then(lists => {
         // res.send(lists)
@@ -173,8 +174,8 @@ class ControllerPlaylist {
   }
 
   static addSongForm(req, res) {
-    let logIn = req.session.user.id
 
+    let logIn = req.session.user
     console.log(logIn, '< ini loh')
 
     Song
@@ -200,6 +201,28 @@ class ControllerPlaylist {
       .catch(err => {
         res.send(err)
       })
+  }
+
+  static addStar(req,res){
+    let playlistId= req.params.id
+
+    Playlist
+    .findOne({
+      where:{id: playlistId}
+    })
+    .then(result=>{
+     return Playlist
+     .update({stars: result.stars+1},
+       {where: {
+         id: playlistId
+       }})
+    })
+    .then(()=>{
+      res.redirect('/playlist')
+    })
+    .catch(err=>{
+      res.send(err)
+    })
   }
 }
 

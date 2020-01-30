@@ -38,7 +38,8 @@
               <% lists.forEach(list => { %>
               <td> <%= list.name %> </td>
               <td><% list.Songs.forEach(song => { %>
-                <li> <%= song.title %> </li>
+                <li><%= song.title %></li>
+                <li style="list-style: none;"><audio src="honestly.mp3" style="margin-bottom: -10;"" controls> </audio</li>
                 <% }) %> </td>
               <td>
                 <a class="btn btn-light" href="/playlist/edit/<%= list.id %>" role="button">Edit</a>

@@ -24,6 +24,8 @@ router.post('/:id/addPlaylist', ControllerPlaylist.addNewPlaylist)
 router.get('/addSong/:id', ControllerPlaylist.addSongForm)
 router.post('/addSong/:id', ControllerPlaylist.addSongPlaylist)
 
+router.get('/star/:id',ControllerPlaylist.addStar)
+
 
 
 module.exports = router

@@ -43,9 +43,11 @@
                   <li> <%= song.title %> </li>
                   <% }) %> </td>
                 <td> <%= list.User.name %> </td>
-                <td> 99 </td>
+                <td> <%=list.stars%> </td>
                 <td>
-                  <a class="btn btn-dark" href="#" role="button">Thumbs Up</a>
+                
+                    <a class="btn btn-dark" href="playlist/star/<%=list.id%>" role="button">Thumbs Up</a>
+                  
                 </td>
               </tr>
               <% }) %>

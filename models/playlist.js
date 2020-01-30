@@ -10,12 +10,16 @@ module.exports = (sequelize, DataTypes) => {
   class Playlist extends Model { }
   Playlist.init({
     name:DataTypes.INTEGER,
-    UserId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER,
+    stars: DataTypes.STRING
   }, { 
     
       hooks:{
       beforeCreate : (instance, options) =>{
-
+        if(instance.name.length == 0){
+          instance.name= "My New Playlist "+new Date().toDateString()
+        }
+        instance.stars=0
       }
     },
     sequelize })
