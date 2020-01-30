@@ -9,8 +9,6 @@ router.post('/login', ControllerUser.login)
 
 router.use('/login', isLogin)
 
-router.get('/adduser', ControllerUser.formadduser)
-router.post('/adduser', ControllerUser.adduser)
 
 
 module.exports = router

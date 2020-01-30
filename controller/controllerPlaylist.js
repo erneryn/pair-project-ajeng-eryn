@@ -1,4 +1,4 @@
-const { User, Song, Playlist, UserPlaylist } = require('../models')
+const { User, Song, Playlist, SongPlaylist } = require('../models')
 
 class ControllerPlaylist {
   static showPlaylist(req, res) {
@@ -57,7 +57,7 @@ class ControllerPlaylist {
     }
     let playlist = {}
 
-    UserPlaylist
+    SongPlaylist
       .findOne({
         where: {
           SongId: song.id
@@ -65,7 +65,7 @@ class ControllerPlaylist {
       })
       .then(list => {
         playlist.id = list.PlaylistId
-        return UserPlaylist
+        return SongPlaylist
           .destroy({
             where: {
               SongId: song.id
@@ -103,7 +103,7 @@ class ControllerPlaylist {
           })
       })
       .then(() => {
-        return UserPlaylist
+        return SongPlaylist
           .destroy({
             where: {
               PlaylistId: playlist.id
@@ -116,6 +116,39 @@ class ControllerPlaylist {
       .catch(err => {
         res.send(err)
       })
+  }
+
+  static formNewPlaylist(req,res){
+    res.render('addnewplaylist', {errors: [] })
+  }
+
+  static addNewPlaylist(req,res){
+    let data = {
+      name : req.body.name,
+      UserId: req.params.id
+    }
+
+    Playlist
+    .create(data)
+    .then((result)=>{
+      res.redirect('/4/addSongToPlaylist')
+    })
+    .catch(err=>{
+      res.render('addnewplaylist', { errors : err.errors})
+    })
+    
+  }
+  
+  static addSongForm(req,res){
+    Song
+    .findAll()
+    .then(result=>{
+      res.render('addsongplaylist',{result})
+    })
+  }
+  
+  static addSongPlaylist(req,res){
+    
   }
 }
 
