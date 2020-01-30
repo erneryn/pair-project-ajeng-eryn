@@ -1,21 +1,24 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
 
   const Sequelize = sequelize.Sequelize
   const Model = Sequelize.Model
+  const user = sequelize.models
 
   class Playlist extends Model { }
   Playlist.init({
-    name:{
-      type : DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull : {msg : "Playlist Name cannot be empty"},
-        notEmpty: {msg : "Playlist Name cannot be empty"}
+    name:DataTypes.INTEGER,
+    UserId: DataTypes.INTEGER
+  }, { 
+    
+      hooks:{
+      beforeCreate : (instance, options) =>{
+        console.log(instance)
+      
       }
     },
-    UserId: DataTypes.INTEGER
-  }, { sequelize })
+    sequelize })
 
   Playlist.associate = function (models) {
     // associations can be defined here

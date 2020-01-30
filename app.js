@@ -7,6 +7,7 @@ const userRouter = require('./Routes/userRoute')
 const playlistRouter = require('./Routes/playlistRoute')
 const session = require('express-session')
 
+app.use(express.static('public'))
 app.use(session({
   secret: 'keyboard cat',
   resave: false,

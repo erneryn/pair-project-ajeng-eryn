@@ -5,13 +5,13 @@ const User = require('../models').User
 class ControllerUser {
   static home(req, res) {
     let logIn = req.session.user
-    console.log(logIn, '<<< ini login')
-
+    console.log(logIn)
     res.render('home', { logIn })
   }
 
   static loginform(req, res) {
-    res.render('loginpage')
+    let logIn = req.session.user
+    res.render('loginpage' ,{ logIn })
   }
 
   static login(req, res) {
@@ -45,7 +45,8 @@ class ControllerUser {
   }
 
   static formadduser(req, res) {
-    res.render('addUser', { data: {}, errors: [] })
+    let logIn = req.session.user
+    res.render('addUser', { data: {}, errors: [] ,logIn})
   }
 
   static adduser(req, res) {
