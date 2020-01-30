@@ -107,7 +107,8 @@ class ControllerUser {
       .catch(err => {
         let errors = err.errors
         let data = dataUser
-        res.render('addUser', { errors, data })
+        let logIn = req.session.user
+        res.render('addUser', { errors, data , logIn})
       })
   }
 
