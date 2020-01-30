@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const nodemailer = require('nodemailer')
 
 const homeRouter = require('./Routes/homeRoute')
 const userRouter = require('./Routes/userRoute')
