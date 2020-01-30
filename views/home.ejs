@@ -42,21 +42,30 @@
           <div class="card-body">
             <h5 class="card-title">My Playlist</h5>
             <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-            <a href="/playlist/1/myPlaylist" class="btn btn-primary">Show My Playlist</a>
+            <% if (logIn) { %>
+            <a href="/playlist/<%=logIn.id%>/myPlaylist" class="btn btn-primary">Show My Playlist</a>
+            <% } else { %>
+            <a href="/home" class="btn btn-primary">Add New Playlist</a>
+            <%  } %>
           </div>
         </div>
       </div>
-        
-        <div class="col-4">
-            <div class="card mr-auto" style="width: 18rem;">
-                <img src="https://i.pinimg.com/originals/fe/c1/18/fec1188fe9a1cec705c0c2489559f0fd.png" class="card-img-top" style="height: fit-content;" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Add New Playlist</h5>
-                  <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="/playlist/4/addPlaylist" class="btn btn-primary">Add New Playlist</a>
-                </div>
-              </div>
+
+      <div class="col-4">
+        <div class="card mr-auto" style="width: 18rem;">
+          <img src="https://i.pinimg.com/originals/fe/c1/18/fec1188fe9a1cec705c0c2489559f0fd.png" class="card-img-top"
+            style="height: fit-content;" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Add New Playlist</h5>
+            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+            <% if (logIn) { %>
+            <a href="/playlist/<%=logIn.id%>/addPlaylist" class="btn btn-primary">Add New Playlist</a>
+            <% } else { %>
+            <a href="/home" class="btn btn-primary">Add New Playlist</a>
+            <%  } %>
+          </div>
         </div>
+      </div>
 
     </div>
   </div>
