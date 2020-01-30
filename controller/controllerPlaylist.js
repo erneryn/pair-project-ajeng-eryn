@@ -111,7 +111,7 @@ class ControllerPlaylist {
           })
       })
       .then(() => {
-        res.redirect(`/${user.id}/myPlaylist`)
+        res.redirect(`/playlist/${user.id}/myPlaylist`)
       })
       .catch(err => {
         res.send(err)
@@ -130,25 +130,43 @@ class ControllerPlaylist {
 
     Playlist
       .create(data)
-      .then((result) => {
-        res.redirect('/4/addSongToPlaylist')
+      .then((playlist) => {
+        res.redirect(`/playlist/addSong/${playlist.id}`)
       })
       .catch(err => {
-        res.render('addnewplaylist', { errors: err.errors })
+        res.send(err)
+        // res.render('addnewplaylist', { errors: err.errors })
       })
-
   }
 
   static addSongForm(req, res) {
+    let logIn = req.session.user.id
+
+    console.log(logIn, '< ini loh')
+
     Song
       .findAll()
       .then(result => {
-        res.render('addsongplaylist', { result })
+        res.render('addsongplaylist', { result, logIn })
+      })
+      .catch(err => {
+        res.send(err)
       })
   }
 
   static addSongPlaylist(req, res) {
-
+    let detail = {
+      PlaylistId: req.params.id,
+      SongId: req.body.id
+    }
+    SongPlaylist
+      .create(detail)
+      .then(() => {
+        res.redirect(`/playlist/addSong/${detail.PlaylistId}`)
+      })
+      .catch(err => {
+        res.send(err)
+      })
   }
 }
 

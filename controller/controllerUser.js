@@ -4,7 +4,10 @@ const User = require('../models').User
 
 class ControllerUser {
   static home(req, res) {
-    res.render('home')
+    let logIn = req.session.user
+    console.log(logIn, '<<< ini login')
+
+    res.render('home', { logIn })
   }
 
   static loginform(req, res) {
@@ -16,23 +19,28 @@ class ControllerUser {
       username: req.body.username,
       password: req.body.password
     }
-    console.log(data)
+
     User
       .findOne({
         where: {
-          username: data.username,
-          password: data.password
+          username: data.username
         }
       })
       .then(result => {
-        if (result == null) {
-          throw err
-        } else {
-          res.redirect('/home')
+        let success = `Hi ${result.username}!`
+
+        if (result.password == data.password) {
+          req.session.user = {
+            username: result.username,
+            id: result.id
+          }
+          req.app.locals.welcome = success
+          res.redirect(`/home?success=${success}`)
         }
       })
       .catch(err => {
-        res.render('loginpage')
+        let error = 'e-mail or password is invalid!'
+        res.render('loginpage', { error })
       })
   }
 
@@ -61,8 +69,15 @@ class ControllerUser {
       })
   }
 
-
-
+  static logout(req, res) {
+    req.session.destroy(function (err) {
+      if (err) {
+        res.send(err)
+      } else {
+        res.redirect('/home')
+      }
+    })
+  }
 
 }
 module.exports = ControllerUser

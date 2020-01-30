@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
+
 const homeRouter = require('./Routes/homeRoute')
 const userRouter = require('./Routes/userRoute')
 const playlistRouter = require('./Routes/playlistRoute')
@@ -16,15 +17,6 @@ app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 
 app.use('/', homeRouter)
-
-// app.use(function (req, res, next) {
-//   if (req.session.user) {
-//     next()
-//   } else {
-//     res.redirect('/login')
-//   }
-// })
-
 
 app.use('/user', userRouter)
 app.use('/playlist', playlistRouter)
