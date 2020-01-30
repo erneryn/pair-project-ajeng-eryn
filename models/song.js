@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     genre: DataTypes.STRING,
     artist: DataTypes.STRING
-  },{sequelize})
+  }, { sequelize })
 
   Song.associate = function (models) {
     // associations can be defined here

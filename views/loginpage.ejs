@@ -28,7 +28,7 @@
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
-      <% if(errors) { %>
+      <% if(typeof errors !== 'undefined' && errors) { %>
       <ul>
         <% errors.forEach(error => { %>
         <li>

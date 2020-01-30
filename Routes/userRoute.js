@@ -8,7 +8,4 @@ router.get('/login', ControllerUser.loginform)
 router.post('/login', ControllerUser.login)
 
 
-
-
-
 module.exports = router
