@@ -81,7 +81,33 @@ class ControllerPlaylist {
   }
 
   static deletePlaylist(req, res) {
+    let playlist = {
+      id: req.params.id
+    }
 
+    let user = {}
+
+    Playlist
+      .findOne({
+        where: {
+          id: playlist.id
+        }
+      })
+      .then(data => {
+        user.id = data.UserId
+        return Playlist
+          .destroy({
+            where: {
+              id: playlist.id
+            }
+          })
+      })
+      .then(() => {
+        res.redirect(`/${user.id}/myPlaylist`)
+      })
+      .catch(err => {
+        res.send(err)
+      })
   }
 }
 
