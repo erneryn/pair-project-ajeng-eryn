@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
 
   const Sequelize = sequelize.Sequelize
   const Model = Sequelize.Model
-  const user = sequelize.models
+ 
+
 
   class Playlist extends Model { }
   Playlist.init({
@@ -14,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     
       hooks:{
       beforeCreate : (instance, options) =>{
-        console.log(instance)
 
       }
     },
