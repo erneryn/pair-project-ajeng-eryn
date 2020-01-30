@@ -32,6 +32,8 @@ class ControllerUser {
       let data = dataUser
       res.render('addUser',{errors , data})
     })
+
+    
   }
 
 
