@@ -103,6 +103,14 @@ class ControllerPlaylist {
           })
       })
       .then(() => {
+        return UserPlaylist
+          .destroy({
+            where: {
+              PlaylistId: playlist.id
+            }
+          })
+      })
+      .then(() => {
         res.redirect(`/${user.id}/myPlaylist`)
       })
       .catch(err => {
