@@ -8,6 +8,7 @@ router.get('/home', function (req, res) {
   res.render('home')
 })
 
+router.get('/login',ControllerUser.loginform)
 
 router.get('/playlist', ControllerPlaylist.showPlaylist)
 
@@ -18,13 +19,9 @@ router.get('/playlist/delete/:id', ControllerPlaylist.deletePlaylist)
 
 router.get('/:id/myPlaylist', ControllerPlaylist.showMyPlaylist)
 
-router.get('/adduser', function (req, res) {
-  ControllerUser.formadduser(req,res)
-})
+router.get('/adduser', ControllerUser.formadduser )
+router.post('/adduser', ControllerUser.adduser)
 
-router.post('/adduser', function (req, res) {
- ControllerUser.adduser(req,res)
-})
 
 
 module.exports = router
