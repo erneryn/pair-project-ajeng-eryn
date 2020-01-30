@@ -9,7 +9,7 @@ class ControllerPlaylist {
       .then(lists => {
         // res.send(lists)
         let logIn = req.session.user
-        res.render('showPlaylist', { lists ,logIn})
+        res.render('showPlaylist', { lists, logIn })
       })
       .catch(err => {
         res.send(err)
@@ -29,14 +29,14 @@ class ControllerPlaylist {
       })
       .then(lists => {
         let logIn = req.session.user
-        res.render('showMyPlaylist', { lists ,logIn})
+        res.render('showMyPlaylist', { lists, logIn })
       })
       .catch(err => {
         res.send(err)
       })
   }
 
-  static editPlaylist(req, res) {
+  static editPlaylistForm(req, res) {
     let playlist = {
       id: req.params.id
     }
@@ -47,7 +47,36 @@ class ControllerPlaylist {
       .then(playlists => {
         // res.send(playlists)
         let logIn = req.session.user
-        res.render('editPlaylist', { playlists ,logIn})
+        res.render('editPlaylist', { playlists, logIn })
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  }
+
+  static editPlaylist(req, res) {
+    let playlist = {
+      id: req.params.id
+    }
+
+    let user = {}
+
+    Playlist
+      .findByPk(playlist.id)
+      .then(list => {
+        user.id = list.UserId
+        return Playlist
+          .update({
+            name: req.body.name
+          }, {
+            where: {
+              id: playlist.id
+            }
+          })
+      })
+      .then((result) => {
+        // res.send(result)
+        res.redirect(`/playlist/${user.id}/myPlaylist`)
       })
       .catch(err => {
         res.send(err)
@@ -123,7 +152,7 @@ class ControllerPlaylist {
 
   static formNewPlaylist(req, res) {
     let logIn = req.session.user
-    res.render('addnewplaylist', { errors: [] ,logIn})
+    res.render('addnewplaylist', { errors: [], logIn })
   }
 
   static addNewPlaylist(req, res) {

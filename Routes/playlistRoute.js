@@ -9,7 +9,8 @@ router.get('/', ControllerPlaylist.showPlaylist)
 
 router.use('/', isLogin)
 
-router.get('/edit/:id', ControllerPlaylist.editPlaylist)
+router.get('/edit/:id', ControllerPlaylist.editPlaylistForm)
+router.post('/edit/:id', ControllerPlaylist.editPlaylist)
 router.get('/edit/delete/:id', ControllerPlaylist.deleteSong)
 
 router.get('/delete/:id', ControllerPlaylist.deletePlaylist)
