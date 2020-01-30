@@ -8,7 +8,8 @@ class ControllerPlaylist {
       })
       .then(lists => {
         // res.send(lists)
-        res.render('showPlaylist', { lists })
+        let logIn = req.session.user
+        res.render('showPlaylist', { lists ,logIn})
       })
       .catch(err => {
         res.send(err)
@@ -27,7 +28,8 @@ class ControllerPlaylist {
         include: Song
       })
       .then(lists => {
-        res.render('showMyPlaylist', { lists })
+        let logIn = req.session.user
+        res.render('showMyPlaylist', { lists ,logIn})
       })
       .catch(err => {
         res.send(err)
@@ -44,7 +46,8 @@ class ControllerPlaylist {
       })
       .then(playlists => {
         // res.send(playlists)
-        res.render('editPlaylist', { playlists })
+        let logIn = req.session.user
+        res.render('editPlaylist', { playlists ,logIn})
       })
       .catch(err => {
         res.send(err)
@@ -119,7 +122,8 @@ class ControllerPlaylist {
   }
 
   static formNewPlaylist(req, res) {
-    res.render('addnewplaylist', { errors: [] })
+    let logIn = req.session.user
+    res.render('addnewplaylist', { errors: [] ,logIn})
   }
 
   static addNewPlaylist(req, res) {
