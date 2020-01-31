@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer')
 
 const ControllerUser = require('../controller/controllerUser')
 
+router.get('/', ControllerUser.home)
 router.get('/home', ControllerUser.home)
 
 router.get('/login', ControllerUser.loginform)

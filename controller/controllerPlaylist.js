@@ -176,7 +176,6 @@ class ControllerPlaylist {
   static addSongForm(req, res) {
 
     let logIn = req.session.user
-    console.log(logIn, '< ini loh')
 
     Song
       .findAll()

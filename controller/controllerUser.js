@@ -8,7 +8,6 @@ const bcrypt = require('bcryptjs');
 class ControllerUser {
   static home(req, res) {
     let logIn = req.session.user
-    console.log(logIn)
     res.render('home', { logIn })
   }
 
